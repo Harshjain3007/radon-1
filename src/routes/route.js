@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-
+const aap = require('aap')
 router.get('/students/:name', function(req, res) {
     let studentName = req.params.name
     console.log(studentName)
@@ -70,4 +70,30 @@ router.post("/test-post-4", function(req, res) {
     res.send(  { msg: arr , status: true }  )
 })
 
+app.get("/sol1", function (req, res) {
+let array = [11,12,13,14,16,17]
+let t = 0;
+for(var i  in array){
+    total = total + array[i];
+}
+let lastdigit = array.pop()
+let consecutivesum = lastdigit*(lastdigit+1)/2
+let missingnumber = consecutivesum -t
+ res.send(missingnumber);
+
+}) 
+app.get("/sol1", function (req, res) {
+    let array = [33,34,35,336,37]
+    let t = 0;
+    for(var i  in array){
+        total = total + array[i];
+    }
+    let lastdigit = array.pop()
+    let consecutivesum = lastdigit*(lastdigit+1)/2
+    let missingnumber = consecutivesum -t
+     res.send(missingnumber);
+    
+    }) 
+
+module.exports = aap;
 module.exports = router;

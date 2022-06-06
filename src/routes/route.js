@@ -8,15 +8,15 @@ router.get("/test-me", function (req, res) {
 })
 router.post("/created", async function (req,res){
     let data = req.body
-    let saveData = await UserModel.create(data)
-    res.send({msg:saveData})
+  let saveData = await UserModel.create(data)
+   res.send({msg:saveData})
 })
 
 
 
-router.post("/createUser", UserController.createUser  )
-router.get("/getUsersData", UserController.getUsersData)
-router.post("/getbookSchema", UserController.getbookSchema)                                       
- router.get("/getbookSchemadata",  UserController.getbookSchema)                                
+//router.post("/createUser", UserController.createUser  )
+//router.get("/getUsersData", UserController.getUsersData)
+router.post("/abc", UserController.getbookSchema)                                       
+ router.get("/getbookSchemadata",UserController.getbookSchemadata)                               
 
 module.exports = router;

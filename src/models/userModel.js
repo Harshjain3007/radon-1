@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { stringify } = require('nodemon/lib/utils');
 
 const userSchema = new mongoose.Schema( {
     firstName: String,
@@ -21,9 +22,23 @@ const userSchema = new mongoose.Schema( {
     //     siblingName: String
     // },
     // cars: [ String  ]
-}, { timestamps: true });
+}, 
+{ timestamps: true });
+const bookSchema = new mongoose.Schema({
+    bookname:String,
+    authorname:String,
+    category: String,
+    bookpage:{
+        type:Number,
+        required:true
+    },
+ },
+  {  timestamps: true  });          
 
-module.exports = mongoose.model('User', userSchema) //users
+
+
+module.exports = mongoose.model('User', userSchema)
+module.exports = mongoose.model('Name', bookSchema) //users
 
 
 

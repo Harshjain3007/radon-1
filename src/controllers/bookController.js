@@ -1,5 +1,4 @@
-const { count } = require("console")
-const BookModel= require("../models/bookModel")
+c
 
 const createBook= async function (req, res) {
     let data= req.body
@@ -57,3 +56,6 @@ module.exports.createBook= createBook
 module.exports.getBooksData= getBooksData
 module.exports.updateBooks= updateBooks
 module.exports.deleteBooks= deleteBooks
+//>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+

@@ -26,13 +26,13 @@ let  abc = await bookModel.find().select({bookName:1,tags:{authorName:1},_id:0})
 
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 const getBookInYear = async function (req,res) {
-    let years = req.body.year
-    let allBooks=await bookModel.find({"year":years})
+    //let years = req.body.year
+    let allBooks=await bookModel.find(req.body.year)
     res.send({msg:allBooks})
 }
 //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 const getParticularBooks = async function (req,res) {
-    let rst = await bookModel.find(req.body)
+    let rst = await bookModel.find(req.body.Book2)
     res.send({msg:rst})
 }
 

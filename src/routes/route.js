@@ -17,11 +17,11 @@ router.get("/test-me", function (req, res) {
 //router.get("/getBooksData", BookController.getBooksData)
 
 router.post("/createBooks", UserController.createBooks)
-router.get("/getbooklist",UserController.booklist)
-router.post("/getBookInYear",UserController.getBookInYear)
-router.post("/getParticularBooks",UserController.getParticularBooks)
+router.get("/booklist",UserController.booklist)
+router.get("/getBookInYear",UserController.getBookInYear)
+router.get("/getParticularBooks",UserController.getParticularBooks)
 router.get("/getXINRBooks", UserController.getParticularBooks) 
-router.post("/getRandomBooks",UserController.getRandomBooks) 
+router.get("/getRandomBooks",UserController.getRandomBooks) 
 
 
 

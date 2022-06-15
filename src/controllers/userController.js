@@ -72,19 +72,56 @@ const updateUser = async function (req, res) {
 // Check if the token present is a valid token
 // Return a different error message in both these cases
 
+
   let userId = req.params.userId;
   let user = await userModel.findById(userId);
   //Return an error if no user with the given id exists in the db
   if (!user) {
     return res.send("No such user exists");
   }
+let token1 = req.headers["x-auth-token"]
+if (!token1) token1 = req.headers["x-auth-token"];
+if (!token1) return res.send({ status: false, msg: "token must be present" });
+console.log(token1);
+
+let decodedToken1 = jwt.verify(token1, "functionup-radon");
+  if (!decodedToken1)
+    return res.send({ status: false, msg: "token is invalid" });
+
+
 
   let userData = req.body;
-  let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData);
+  let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData,{new:true});
   res.send({ status: updatedUser, data: updatedUser });
 };
+
+
+const removeuser = async function (req, res) {
+    let userId = req.params.userId;
+    let user = await userModel.findById(userId);
+
+    if (!user) {
+        return res.send("No such user exists");
+      }
+      let token1 = req.headers["x-auth-token"]
+      if (!token1) token1 = req.headers["x-auth-token"];
+      if (!token1) return res.send({ status: false, msg: "token must be present" });
+      console.log(token1);
+      
+      let decodedToken1 = jwt.verify(token1, "functionup-radon");
+        if (!decodedToken1)
+          return res.send({ status: false, msg: "token is invalid" });
+let removerdata = req.body;
+let removedUser =       await userModel.findOneAndUpdate({ _id: userId }, removerdata,{new:true});
+res.send({status:removedUser,data:removedUser})
+    }
+
+
+
+
 
 module.exports.createUser = createUser;
 module.exports.getUserData = getUserData;
 module.exports.updateUser = updateUser;
 module.exports.loginUser = loginUser;
+module.exports.removeuser = removeuser;

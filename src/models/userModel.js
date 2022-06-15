@@ -42,7 +42,7 @@ gender:{
     type:String,
     enum: ["male", "female","other"]
 },
-freeaapuser: {
+isfreeaapuser: {
 type: Boolean,
 default: false,
 },

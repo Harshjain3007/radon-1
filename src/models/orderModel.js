@@ -1,18 +1,19 @@
 const moment = require('moment');
 const mongoose = require('mongoose');
+const ObjectId = mongoose.Schema.Types.ObjectId
 
 const orderSchema = new mongoose.Schema ({ 
       userId:{
           type:ObjectId,
-          ref:'User'
+          ref:'user'
     },
     productId:{
         type:ObjectId,
         ref:'product' 
     },
     amount: Number,
-    freeaapuser: true,
-    date: moment().format()
+    
+    
 },
 {timeStamps:true})
 module.exports = mongoose.model('order',orderSchema)

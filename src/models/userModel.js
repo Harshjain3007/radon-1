@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema( {
     //     motherName: String,
     //     fatherName: String,
     //     siblingName: String
-    // },
+    // }
     // cars: [ String  ]
 }, { timestamps: true });
 

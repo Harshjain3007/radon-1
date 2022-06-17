@@ -12,10 +12,10 @@ router.post("/users", userController.createUser)
 router.post("/login", userController.loginUser)
 
 //The userId is sent by front end
-router.get("/users/:userId",auth.authenticate, userController.getUserData)
-router.post("/users/:userId/posts",auth.authenticate, userController.postMessage)
+router.get("/users/:userId",auth.authenticate,auth.authorise, userController.getUserData)
+router.post("/users/:userId/posts",auth.authenticate,auth.authorise, userController.postMessage)
 
-router.put("/users/:userId",auth.authenticate, userController.updateUser)
-router.delete('/users/:userId',auth.authenticate, userController.deleteUser)
+router.put("/users/:userId",auth.authenticate,auth.authorise, userController.updateUser)
+router.delete('/users/:userId',auth.authenticate, auth.authorise, userController.deleteUser)
 
 module.exports = router;

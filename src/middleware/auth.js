@@ -13,10 +13,16 @@ const authenticate = function(req, res, next) {
     let decodedToken = jwt.verify(token, "functionup-thorium");
     if (!decodedToken)
       return res.send({ status: false, msg: "token is invalid" });
-      let userToBeModified = req.params.userId
-      let userLoggedIn = decodedToken.userId
+      next()
 
-      if(userToBeModified!= userLoggedIn) return res.send({status: false, msg: 'User logged is not allowed to modify the requested users data'})
+}
+
+ const authorise = function(req,res,next) {
+   let decodedToken = jwt.verify(token, "functionup-thorium");
+let userToBeModified = req.params.userId
+  let userLoggedIn = decodedToken.userId
+ if(userToBeModified!= userLoggedIn)
+  return res.send({status: false, msg: 'User logged is not allowed to modify the requested users data'})
       next()
 }
 
@@ -24,3 +30,4 @@ const authenticate = function(req, res, next) {
 
 
 module.exports.authenticate = authenticate
+module.exports.authorise = authorise

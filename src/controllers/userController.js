@@ -5,13 +5,19 @@ const createUser = async function (abcd, xyz) {
   //You can name the req, res objects anything.
   //but the first parameter is always the request 
   //the second parameter is always the response
+try{
   let data = abcd.body;
   let savedData = await userModel.create(data);
   console.log(abcd.newAtribute);
-  xyz.send({ msg: savedData });
-};
+  xyz.status(200).send({ msg: savedData });
+}catch(error){
+    xyz.status(400).send({msg:"Error",error: error.message})
+}
+}
+
 
 const loginUser = async function (req, res) {
+try{
   let userName = req.body.emailId;
   let password = req.body.password;
 
@@ -37,11 +43,15 @@ const loginUser = async function (req, res) {
     "functionup-thorium"
   );
   res.setHeader("x-auth-token", token);
-  res.send({ status: true, data: token });
-};
+  res.status(200).send({ status: true, data: token });
+} catch (error){
+    res.status(500).send({msg:"Error",error: error.message})
+}
+}
 
 const getUserData = async function (req, res) {
-  let token = req.headers["x-Auth-token"];
+ try{
+    let token = req.headers["x-Auth-token"];
   if (!token) token = req.headers["x-auth-token"];
 
   //If no token is present in the request header return error
@@ -63,15 +73,18 @@ const getUserData = async function (req, res) {
   if (!userDetails)
     return res.send({ status: false, msg: "No such user exists" });
 
-  res.send({ status: true, data: userDetails });
-};
+  res.status(200).send({ status: true, data: userDetails });
+}catch(error){
+      res.status(500).send(error.message)
+}
+}
 
 const updateUser = async function (req, res) {
 // Do the same steps here:
 // Check if the token is present
 // Check if the token present is a valid token
 // Return a different error message in both these cases
-
+try{
   let userId = req.params.userId;
   let user = await userModel.findById(userId);
   //Return an error if no user with the given id exists in the db
@@ -81,9 +94,13 @@ const updateUser = async function (req, res) {
 
   let userData = req.body;
   let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData);
-  res.send({ status: updatedUser, data: updatedUser });
-};
+  res.status(200).send({ status: updatedUser, data: updatedUser });
+}catch(error){
+    res.status(500).send(error.message)
+}
+}
 const deleteUser = async function (req,res){
+  try{  
     let userId = req.params.userId;
     let user = await userModel.findById(userId);
     if (!user) {
@@ -91,9 +108,10 @@ const deleteUser = async function (req,res){
       }
       let userData = req.body;
       let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, {isdeleted:true},{new:true});
-      res.send({ status: updatedUser, data: updatedUser });
-
-
+      res.status(200).send({ status: updatedUser, data: updatedUser });
+}catch(error){
+    res.status(500).send(error.message)
+}
 }
 
 
@@ -101,8 +119,8 @@ const deleteUser = async function (req,res){
 
 
 
-
 const postMessage = async function (req, res) {
+    try{
     let message = req.body.message
     // Check if the token is present
     // Check if the token present is a valid token
@@ -130,7 +148,10 @@ const postMessage = async function (req, res) {
     let updatedUser = await userModel.findOneAndUpdate({_id: user._id},{posts: updatedPosts}, {new: true})
 
     //return the updated user document
-    return res.send({status: true, data: updatedUser})
+    return res.status(200).send({status: true, data: updatedUser})
+}catch(error){
+    res.status(500).send(error.message)
+}
 }
 
 

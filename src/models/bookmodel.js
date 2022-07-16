@@ -2,7 +2,9 @@ const mongoose = require('mongoose')
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
 const bookSchema = new mongoose.Schema({
-
+    bookCover:{
+        type: String
+    },
     title: {
         type: String,
         required: true,
@@ -32,8 +34,8 @@ const bookSchema = new mongoose.Schema({
         trim: true
     },
     subcategory: {
-        type: [String],
-        required: true,
+        type: String,
+        
         trim: true
     },
     reviews: {

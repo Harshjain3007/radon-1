@@ -3,9 +3,12 @@ const bodyParser = require('body-parser');
 const route = require('./routes/routes.js');
 const { default: mongoose } = require('mongoose');
 const app = express();
+const multer= require("multer");
+const { AppConfig } = require('aws-sdk');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.use(multer().any())
 
 
 mongoose.connect("mongodb+srv://whohardik:LntVg5QKb7WCzwTi@cluster0.wgnjb.mongodb.net/group21Database", {

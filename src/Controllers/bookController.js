@@ -1,4 +1,6 @@
 const bookModel = require("../models/bookModel");
+const awsController= require("../Controllers/awsController")
+
 const {
   isValidReqBody,
   isValid,
@@ -17,7 +19,9 @@ const createBook = async function (req, res) {
   try {
     // book details sent through request body
     const data = req.body;
-
+    let files= req.files
+        
+          
     const {
       title,
       excerpt,
@@ -27,7 +31,9 @@ const createBook = async function (req, res) {
       subcategory,
       isDeleted,
       releasedAt,
+     
     } = data;
+
 
     // VALIDATIONS:
 
@@ -120,26 +126,26 @@ const createBook = async function (req, res) {
       });
     }
 
-     // if subcategory is an array then validating each element
-     if (Array.isArray(subcategory)) {
-      for (let i = 0; i < subcategory.length; i++) {
-        element = subcategory[i];
-        if (!isValid(element)) {
-          return res.status(400).send({
-            status: false,
-            message: 'subcategory is (required field) format like: ["Fiction","Classic"]',
-          });
-        }
-      }
-    }
+    //  // if subcategory is an array then validating each element
+    //  if (Array.isArray(subcategory)) {
+    //   for (let i = 0; i < subcategory.length; i++) {
+    //     element = subcategory[i];
+    //     if (!isValid(element)) {
+    //       return res.status(400).send({
+    //         status: false,
+    //         message: 'subcategory is (required field) format like: ["Fiction","Classic"]',
+    //       });
+    //     }
+    //   }
+    // }
 
-    // if subcategory is empty
-    if (!isValidSubcategory(subcategory)) {
-      return res.status(400).send({
-        status: false,
-        message: "Please provide the subcategory (required field)",
-      });
-    }
+    // // if subcategory is empty
+    // if (!isValidSubcategory(subcategory)) {
+    //   return res.status(400).send({
+    //     status: false,
+    //     message: "Please provide the subcategory (required field)",
+    //   });
+    // }
 
     // if releasedAt is empty
     if (!isValid(releasedAt)) {
@@ -166,7 +172,7 @@ const createBook = async function (req, res) {
 
     // if deletedAt is entered
     delete data.deletedAt;
-
+data.bookCover=req.awsurl
     //creating book
     const createdBook = await bookModel.create(data);
 

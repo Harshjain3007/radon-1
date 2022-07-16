@@ -4,6 +4,7 @@ const userController = require("../Controllers/userController")
 const bookController = require("../controllers/bookController");
 const reviewController = require("../controllers/reviewController");
 const middleware = require("../middlewares/middleware");
+const awsController=require("../Controllers/awsController")
 
 router.get("/test-me", function (req, res) {
     res.send("My first ever api!")
@@ -20,7 +21,7 @@ router.post("/login", userController.loginUser)
 
 //==============================Api to create a book=======================//
 
-router.post("/books", middleware.authentication, bookController.createBook);
+router.post("/books", middleware.authentication,awsController.aws1, bookController.createBook);
 
 //==========================Api to get books============================//
 

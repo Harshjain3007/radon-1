@@ -27,6 +27,7 @@ const createReview = async function (req, res) {
 
     //taking bookId in path params of which user want to review
     const bookId = req.params.bookId;
+    let bookdetails = await bookModel.findById(bookId)
 
     //checking for valid objectId (bookId) given by user i.e. 24 byte
     if (!isValidObjectId(bookId)) {
@@ -112,7 +113,7 @@ const createReview = async function (req, res) {
     res.status(201).send({
       status: true,
       message: "Review created successfully",
-      data: findReviewId,
+      data: findReviewId,bookdetails
     });
 
     //finding book with bookId and updting its review count
